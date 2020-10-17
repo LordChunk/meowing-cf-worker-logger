@@ -10,12 +10,17 @@ app.get('/', (req, res) => res.send('Hello world'));
 
 app.post('/logrequest', (request, response) => {
   try {
-      admin.firestore().collection('logs').add(request.body);
+      console.log(request.body);
+
+      let data = request.body;
+
+      admin.firestore().collection('logs').add(data);
       response.send("Document added to the database");
   }
   catch (error) {
-      console.log(error);
-      response.send("Request errored");
+      console.log("Request errored");
+      console.log(e);
+      response.error("Request errored");
   }
 });
 
