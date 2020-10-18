@@ -14,10 +14,9 @@ app.post('/logrequest', async (request, response) => {
       const headerObjectArray: Array<object> = [];
 
       headers.forEach(headerArray => {
-        const headerObject = {
-          key: headerArray[0],
-          value: headerArray[1]
-        }
+        const headerObject: any = {};
+
+        headerObject[headerArray[0]] = headerArray[1];
 
         headerObjectArray.push(headerObject);
       });
