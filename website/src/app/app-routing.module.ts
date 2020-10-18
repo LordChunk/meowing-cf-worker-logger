@@ -1,11 +1,24 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
+import { BrowserModule } from '@angular/platform-browser';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { LoginComponent } from './login/login.component';
+import { NotFoundComponent } from './navfooter/not-found/not-found.component';
+import { AuthGuard } from './guards/auth.guard';
 
-
-const routes: Routes = [];
+const routes: Routes = [
+  { path: '', component: DashboardComponent },
+  { path: 'login', component: LoginComponent },
+  { path: '**', component: NotFoundComponent },
+];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  imports: [
+    RouterModule.forRoot(routes),
+    BrowserModule,
+  ],
+
+  exports: [RouterModule],
 })
 export class AppRoutingModule { }
+

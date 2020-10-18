@@ -1,0 +1,22 @@
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80vw;
+  padding: 15px 10vw;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 450px;
+    max-width: 90vw;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-evenly;
+    button {
+        width: 120px;
+    }
+}

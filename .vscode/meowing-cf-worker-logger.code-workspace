@@ -12,7 +12,7 @@
 			"name": "website-src"
 		},
 		{
-			"path": "..\\website\\src",
+			"path": "..\\website",
 			"name": "website"
 		},
 	],
