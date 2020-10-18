@@ -32,8 +32,8 @@ app.post('/logrequest', async (request, response) => {
 
       await admin.firestore().collection('logs').add(dbObject);
       
-      response.send(dataWithHeaders);
-      // response.send("Success");
+      // response.send(dataWithHeaders);
+      response.send("Success");
   }
   catch (error) {
       console.log("Request errored");
