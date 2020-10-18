@@ -8,11 +8,12 @@
 			"path": "..\\functions",
 		},
 		{
-			"path": "..\\website\\src",
+			"path": "..\\website\\src\\app",
 			"name": "website-src"
 		},
 		{
-			"path": "..\\website"
+			"path": "..\\website\\src",
+			"name": "website"
 		},
 	],
 	"settings": {}

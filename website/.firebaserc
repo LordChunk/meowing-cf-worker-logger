@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "meowing-cf-worker-logger": {
+      "hosting": {
+        "meowing-cf-logger-website": [
+          "meowing-cf-worker-logger"
+        ]
+      }
+    }
+  }
+}
