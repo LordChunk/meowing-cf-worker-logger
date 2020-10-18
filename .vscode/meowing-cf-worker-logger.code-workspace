@@ -1,0 +1,19 @@
+{
+	"folders": [
+		{
+			"path": "..",
+			"name": "root"
+		},
+		{
+			"path": "..\\functions",
+		},
+		{
+			"path": "..\\website\\src",
+			"name": "website-src"
+		},
+		{
+			"path": "..\\website"
+		},
+	],
+	"settings": {}
+}
