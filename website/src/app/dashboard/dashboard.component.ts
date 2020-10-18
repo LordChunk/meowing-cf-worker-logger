@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { NAVITEMS } from '../models/nav-item.model';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,6 +8,9 @@ import { NAVITEMS } from '../models/nav-item.model';
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent {
-  // Set as property so it can be used in html file
-  navItems = NAVITEMS;
+  logs: Observable<any[]>;
+
+  constructor(firestore: AngularFirestore) {
+    this.logs = firestore.collection('logs').valueChanges();
+  }
 }

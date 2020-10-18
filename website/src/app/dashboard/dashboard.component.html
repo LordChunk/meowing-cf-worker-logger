@@ -1,18 +1,3 @@
-<div class="grid-container">
-  <ng-container *ngFor="let navItem of navItems">
-    <!-- Don't paste home element on dashboard-->
-    <a *ngIf="navItem.name != 'home'"
-      class="papers" 
-      routerLink="{{ navItem.path }}"
-    >
-      <div class="top-div">
-        <mat-icon>{{ navItem.icon }}</mat-icon>
-      </div>
-      <div class="bottom-div">
-        <span>
-          {{ navItem.name | titlecase }}
-        </span>  
-      </div>
-    </a>
-  </ng-container>
-</div>
+<pre *ngFor="let item of logs | async" >
+  {{ item | json }}
+</pre>
