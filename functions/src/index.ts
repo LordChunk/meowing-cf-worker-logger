@@ -11,18 +11,14 @@ app.post('/logrequest', async (request, response) => {
   try {
       const data = JSON.parse(JSON.stringify(request.body));
       const headers: Array<Array<string>> =  data.headers;
-      const headerObjectArray: Array<object> = [];
 
+      const headerObject: any = {};
       headers.forEach(headerArray => {
-        const headerObject: any = {};
-
         headerObject[headerArray[0]] = headerArray[1];
-
-        headerObjectArray.push(headerObject);
       });
 
       const dataWithHeaders = data;
-      dataWithHeaders.headers = headerObjectArray;
+      dataWithHeaders.headers = headerObject;
 
       const dbObject = {
         date: new Date().toISOString(),
