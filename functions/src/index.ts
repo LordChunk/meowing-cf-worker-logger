@@ -25,9 +25,15 @@ app.post('/logrequest', async (request, response) => {
       const dataWithHeaders = data;
       dataWithHeaders.headers = headerObjectArray;
 
-      await admin.firestore().collection('logs').add(dataWithHeaders);
+      const dbObject = {
+        date: new Date().toISOString(),
+        request: dataWithHeaders
+      };
+
+      await admin.firestore().collection('logs').add(dbObject);
       
       response.send(dataWithHeaders);
+      // response.send("Success");
   }
   catch (error) {
       console.log("Request errored");
