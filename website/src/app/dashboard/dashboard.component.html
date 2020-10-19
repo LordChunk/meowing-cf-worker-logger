@@ -1,3 +1,6 @@
-<pre *ngFor="let item of logs | async" >
-  {{ item | json }}
-</pre>
+<div *ngFor="let log of logs | async">
+  <strong>Location: {{ log.request.cf.country }}</strong>
+  <pre>
+{{ log | json }}
+  </pre>
+</div>

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
+import { CfRequestLog } from '../models/cf-request-log.model';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,9 +9,9 @@ import { Observable } from 'rxjs';
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent {
-  logs: Observable<any[]>;
+  logs: Observable<CfRequestLog[]>;
 
   constructor(firestore: AngularFirestore) {
-    this.logs = firestore.collection('logs').valueChanges();
+    this.logs = firestore.collection<CfRequestLog>('logs').valueChanges();
   }
 }
