@@ -1,6 +1,11 @@
-<div *ngFor="let log of logs | async">
+<!-- <div *ngFor="let log of logs | async">
   <strong>Location: {{ log.request.cf.country }}</strong>
   <pre>
 {{ log | json }}
   </pre>
+</div> -->
+
+<div *ngFor="let countryItem of countryCount | async" >
+  <strong>Country: {{countryItem.country}}</strong>
+  <span>Count: {{countryItem.count}}</span>
 </div>
