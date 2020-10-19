@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { map, mapTo } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
+import { CountryInput } from '../components/country-pie/country-pie.component';
 import { CfRequestLog } from '../models/cf-request-log.model';
 
 @Component({
@@ -11,7 +12,7 @@ import { CfRequestLog } from '../models/cf-request-log.model';
 })
 export class DashboardComponent {
   public logs: Observable<CfRequestLog[]>;
-  public countryCount: Observable<Array<{ country: string, count: number }>>;
+  public countryCount: Observable<Array<CountryInput>>;
 
   constructor(firestore: AngularFirestore) {
     this.logs = firestore.collection<CfRequestLog>('logs').valueChanges();
@@ -19,14 +20,14 @@ export class DashboardComponent {
     this.countryCount = this.logs.pipe(
       map(logArray => {
         const countries = logArray.map(log => log.request.cf.country);
-        const countryNameCount: Array<{ country: string, count: number }> = [];
+        const countryNameCount: Array<CountryInput> = [];
 
         countries.forEach(countryName => {
-          const country = countryNameCount.find(item => item.country === countryName);
+          const country = countryNameCount.find(item => item.name === countryName);
           if (country !== undefined) {
             country.count++;
           } else {
-            countryNameCount.push({ country: countryName, count: 1 });
+            countryNameCount.push({ name: countryName, count: 1 });
           }
         });
 

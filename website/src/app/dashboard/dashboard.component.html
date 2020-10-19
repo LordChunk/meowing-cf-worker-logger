@@ -6,6 +6,8 @@
 </div> -->
 
 <div *ngFor="let countryItem of countryCount | async" >
-  <strong>Country: {{countryItem.country}}</strong>
+  <strong>Country: {{countryItem.name}}</strong>
   <span>Count: {{countryItem.count}}</span>
 </div>
+
+<app-country-pie [countries]=countryCount></app-country-pie>

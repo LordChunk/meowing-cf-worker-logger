@@ -9,6 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavfooterModule } from './navfooter/navfooter.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { LoginModule } from './login/login.module';
+import { ComponentsModule } from './components/components.module';
 
 import { HttpClientModule } from '@angular/common/http';
 
@@ -21,6 +22,7 @@ import { AuthService } from './services/authentication.service';
   ],
   imports: [
     BrowserModule,
+    ComponentsModule,
     AppRoutingModule,
     NavfooterModule,
     BrowserAnimationsModule,
