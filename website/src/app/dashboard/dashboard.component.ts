@@ -32,6 +32,12 @@ export class DashboardComponent {
         });
 
         return countryNameCount.sort((a, b) => b.count - a.count);
-      }));
+      }
+    ));
   }
+
+  public countryPieStyle = {
+    width: '40vw',
+    // height: '40vh',
+  };
 }

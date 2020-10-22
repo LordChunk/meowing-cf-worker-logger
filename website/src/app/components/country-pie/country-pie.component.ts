@@ -1,3 +1,4 @@
+import { NgStyle } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { ChartOptions, ChartType } from 'chart.js';
 import { Label, SingleDataSet } from 'ng2-charts';
@@ -14,7 +15,9 @@ export class CountryPieComponent implements OnInit {
   };
 
   @Input() countries: Observable<CountryInput[]>;
+  @Input() pieStyle;
 
+  public pieChartMaxSegments = 6;
   public pieChartLabels: Label[] = [];
   public pieChartData: SingleDataSet = [];
   public pieChartType: ChartType = 'pie';
@@ -29,10 +32,21 @@ export class CountryPieComponent implements OnInit {
     this.countries.subscribe(countries => {
       this.pieChartLabels = [];
       this.pieChartData = [];
-      countries.forEach(country => {
-        this.pieChartLabels.push(country.name);
-        this.pieChartData.push(country.count);
+
+      let remaining = 0;
+      countries.forEach((country, i) => {
+        if (i <= this.pieChartMaxSegments) {
+          this.pieChartLabels.push(country.name);
+          this.pieChartData.push(country.count);
+        } else {
+          remaining += country.count;
+        }
       });
+
+      if (remaining > 0) {
+        this.pieChartLabels.push('Remaining countries');
+        this.pieChartData.push(remaining);
+      }
     });
   }
 
