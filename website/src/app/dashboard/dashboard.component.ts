@@ -49,8 +49,7 @@ export class DashboardComponent {
       map(logArray => {
         const mostRequestedArray: Array<{ path: string, count: number }> = [];
         logArray.forEach(log => {
-          const url = log.request.url.split('https://meowingdalmatian.chu.mk/').pop();
-
+          const url = log.request.url.split('https://meowingdalmatian.chu.mk/').pop().split('?')[0];
           const requestItem = mostRequestedArray.find(item => item.path === url);
           if (requestItem !== undefined) {
             requestItem.count++;
