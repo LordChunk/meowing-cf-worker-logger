@@ -1,7 +1,17 @@
 <app-country-pie [countries]=countryCount [pieStyle]=countryPieStyle></app-country-pie>
 
 
-<div *ngFor="let countryItem of countryCount | async" >
-  <strong>Country: {{countryItem.name}}</strong>
-  <span>  Count: {{countryItem.count}}</span>
+<div>
+  <h3>Data per country</h3>
+  <p *ngFor="let countryItem of countryCount | async" >
+    <strong>Country: {{countryItem.name}}</strong>
+    <span>  Count: {{countryItem.count}}</span>
+  </p>
+</div>
+<br><br>
+<div>
+  <h3>Bandwidth</h3>
+  <p>
+    <strong>Total Bandwidth: </strong> {{ (bandWidthTotal | async)/1000000 | number }} Megabyte
+  </p>
 </div>

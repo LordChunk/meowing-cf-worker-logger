@@ -14,6 +14,8 @@ export class DashboardComponent {
   public logs: Observable<CfRequestLog[]>;
   public countryCount: Observable<Array<CountryInput>>;
 
+  public bandWidthTotal: Observable<number>;
+
   constructor(firestore: AngularFirestore) {
     this.logs = firestore.collection<CfRequestLog>('logs').valueChanges();
 
@@ -34,6 +36,13 @@ export class DashboardComponent {
         return countryNameCount.sort((a, b) => b.count - a.count);
       }
     ));
+
+    this.bandWidthTotal = this.logs.pipe(
+      map(logArray => {
+        let byteCount = 0;
+        logArray.forEach(log => byteCount += +log.request.contentLength);
+        return byteCount;
+      }));
   }
 
   public countryPieStyle = {

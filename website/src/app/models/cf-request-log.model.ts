@@ -12,6 +12,7 @@ interface Request {
   fetcher: Fetcher;
   bodyUsed: boolean;
   redirect: string;
+  contentLength: number;
 }
 
 interface Fetcher {
