@@ -2,7 +2,7 @@
 
 
 <div>
-  <h3>Data per country</h3>
+  <h3>All requests per country</h3>
   <p *ngFor="let countryItem of countryCount | async" >
     <strong>Country: {{countryItem.name}}</strong>
     <span>  Count: {{countryItem.count}}</span>
@@ -20,9 +20,10 @@
 
 <div>
   <h3>Most Requested Files</h3>
+  <h4>Total number of requested files: {{ totalRequestCount | async }}</h4>
   <p *ngFor="let item of mostRequestedPaths | async" >
-    <span>Count: {{item.count}} </span>
-    <strong>Path: {{item.path}}</strong>
+    <strong>Count: </strong> {{item.count}}
+    <strong>Path: </strong> {{item.path}}
   </p>
 </div>
 

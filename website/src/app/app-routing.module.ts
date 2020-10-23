@@ -4,10 +4,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
 import { NotFoundComponent } from './navfooter/not-found/not-found.component';
-import { AuthGuard } from './guards/auth.guard';
+import { ShortTermDashboardComponent } from './short-term-dashboard/short-term-dashboard.component';
 
 const routes: Routes = [
   { path: '', component: DashboardComponent },
+  { path: 'recent', component: ShortTermDashboardComponent },
   { path: 'login', component: LoginComponent },
   { path: '**', component: NotFoundComponent },
 ];
