@@ -58,7 +58,7 @@ export class DashboardComponent {
             mostRequestedArray.push({ path: url, count: 1 });
           }
         });
-        return mostRequestedArray;
+        return mostRequestedArray.sort((a, b) => b.count - a.count);
       }
     ));
   }
