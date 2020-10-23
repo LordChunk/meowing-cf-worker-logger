@@ -15,3 +15,15 @@
     <strong>Total Bandwidth: </strong> {{ (bandWidthTotal | async)/1000000 | number }} Megabytes
   </p>
 </div>
+
+<br><br>
+
+<div>
+  <h3>Most Requested Files</h3>
+  <p *ngFor="let item of mostRequestedPaths | async" >
+    <span>Count: {{item.count}} </span>
+    <strong>Path: {{item.path}}</strong>
+  </p>
+</div>
+
+<!-- <app-component-dashboard></app-component-dashboard> -->

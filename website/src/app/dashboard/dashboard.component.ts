@@ -15,6 +15,7 @@ export class DashboardComponent {
   public countryCount: Observable<Array<CountryInput>>;
 
   public bandWidthTotal: Observable<number>;
+  public mostRequestedPaths: Observable<Array<{ path: string, count: number }>>;
 
   constructor(firestore: AngularFirestore) {
     this.logs = firestore.collection<CfRequestLog>('logs').valueChanges();
@@ -35,7 +36,7 @@ export class DashboardComponent {
 
         return countryNameCount.sort((a, b) => b.count - a.count);
       }
-    ));
+      ));
 
     this.bandWidthTotal = this.logs.pipe(
       map(logArray => {
@@ -43,6 +44,23 @@ export class DashboardComponent {
         logArray.forEach(log => byteCount += +log.request.contentLength);
         return byteCount;
       }));
+
+    this.mostRequestedPaths = this.logs.pipe(
+      map(logArray => {
+        const mostRequestedArray: Array<{ path: string, count: number }> = [];
+        logArray.forEach(log => {
+          const url = log.request.url.split('https://meowingdalmatian.chu.mk/').pop();
+
+          const requestItem = mostRequestedArray.find(item => item.path === url);
+          if (requestItem !== undefined) {
+            requestItem.count++;
+          } else {
+            mostRequestedArray.push({ path: url, count: 1 });
+          }
+        });
+        return mostRequestedArray;
+      }
+    ));
   }
 
   public countryPieStyle = {
