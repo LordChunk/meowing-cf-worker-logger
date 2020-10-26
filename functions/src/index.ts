@@ -26,8 +26,9 @@ app.post('/logrequest', async (request, response) => {
   }
 });
 
-exports.oldLogRemover = functions.region('europe-west1').pubsub.schedule("every 24 hours").onRun(async () => {
-  admin.initializeApp();
+exports.oldLogRemover = functions.region('europe-west1')
+  .pubsub.schedule("every 24 hours")
+  .onRun(async () => {
 
   const retentionInDays = 30;
   const expiryDate = new Date(Date.now() - retentionInDays * 24 * 60 * 60 * 1000)
