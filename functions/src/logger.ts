@@ -5,8 +5,6 @@ import * as express from "express";
 const app = express();
 admin.initializeApp();
 
-app.get('/', (req, res) => res.send('Hello world'));
-
 app.post('/logrequest', async (request, response) => {
   try {
       const data = JSON.parse(JSON.stringify(request.body));
@@ -26,6 +24,22 @@ app.post('/logrequest', async (request, response) => {
       console.log(error);
       response.send("Response errored: "+ error);
   }
+});
+
+exports.oldLogRemover = functions.region('europe-west1').pubsub.schedule("every 24 hours").onRun(async () => {
+  admin.initializeApp();
+
+  const retentionInDays = 30;
+  const expiryDate = new Date(Date.now() - retentionInDays * 24 * 60 * 60 * 1000)
+
+  const logs = admin.firestore().collection('logs'); 
+  const expiredLogs =  await logs.where('date', '<', expiryDate).get();
+  
+  expiredLogs.forEach(log => {
+    log.ref.delete().catch(console.error);
+  })
+
+  console.log("Tried to delete "+ expiredLogs.size +" logs.");
 });
 
 exports.api = functions.region('europe-west1').https.onRequest(app);
