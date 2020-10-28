@@ -1,14 +1,26 @@
-const LOG_URL = "https://europe-west1-meowing-cf-worker-logger.cloudfunctions.net/api/logrequest";
+const LOG_URL =
+  "https://europe-west1-meowing-cf-worker-logger.cloudfunctions.net/api/logrequest";
+const DEV_LOG_URL = "https://local.chu.mk/api/httprequests";
 const PUBLIC_URL = "https://meowingdalmatian.chu.mk/public/";
 
-async function postLog(data) {
-  return fetch(LOG_URL, {
-    method: "POST",
-    body: JSON.stringify(data),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+async function postLog(data, production) {
+  if (!production) {
+    return fetch(DEV_LOG_URL, {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  } else {
+    return fetch(LOG_URL, {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  }
 }
 
 async function handleRequest(event) {
@@ -20,11 +32,14 @@ async function handleRequest(event) {
     return new Response("Invalid Request", { status: 403 });
   }
 
-  let url;  
-  if(public) {
-      // Always add ?dl=1 to the end of the url and remove all other parameters
-    let newRequestUrl = request.url.replace(PUBLIC_URL, "https://www.dropbox.com/s/")
-    newRequestUrl = newRequestUrl.split('?')[0] += '?dl=1';
+  let url;
+  if (public) {
+    // Always add ?dl=1 to the end of the url and remove all other parameters
+    let newRequestUrl = request.url.replace(
+      PUBLIC_URL,
+      "https://www.dropbox.com/s/"
+    );
+    newRequestUrl = newRequestUrl.split("?")[0] += "?dl=1";
     url = newRequestUrl;
   } else {
     url = request;
@@ -41,17 +56,23 @@ async function handleRequest(event) {
   response = new Response(response.body, response);
   //Set cache control headers to cache on browser for 25 minutes
   response.headers.set("Cache-Control", "max-age=2628000");
-  
+
   // Try logging request if from gmod
-  if(userAgent.includes("Valve/Steam HTTP Client")) {
+  if (userAgent.includes("Valve/Steam HTTP Client")) {
     try {
       let loggableRequest = JSON.parse(JSON.stringify(request));
+      const headerMap = [...request.headers];
+
+      const requestWithHeaderMap = loggableRequest;
+      requestWithHeaderMap.headers = headerMap;
+
+      // Send log for ASP .NET client
+      event.waitUntil(postLog(requestWithHeaderMap, false));
 
       // Convert header map to an array of header objects
       let headerObjectList = {};
-      const headerMap = [...request.headers];
       for (i = 0; i < headerMap.length; i++) {
-          const headerMapItem = headerMap[i];
+        const headerMapItem = headerMap[i];
         headerObjectList[headerMapItem[0]] = headerMapItem[1];
       }
       loggableRequest.headers = headerObjectList;
@@ -59,7 +80,7 @@ async function handleRequest(event) {
       // Log approximate size of request
       loggableRequest.contentLength = response.headers.get("content-length");
 
-      postLog(loggableRequest);
+      event.waitUntil(postLog(loggableRequest, true));
     } catch (e) {
       console.log("Logging error");
       console.log(e);
