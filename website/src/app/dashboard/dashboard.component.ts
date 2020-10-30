@@ -25,7 +25,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.countryCount = this.logs.pipe(
       map(logArray => {
-        const countries = logArray.map(log => log.request.cf.country);
+        const countries = logArray.map(log => log.request.cf?.country);
         const countryNameCount: Array<CountryInput> = [];
 
         countries.forEach(countryName => {
