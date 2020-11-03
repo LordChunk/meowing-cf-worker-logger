@@ -21,7 +21,7 @@ import { AuthService } from './services/authentication.service';
     AppComponent,
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     ComponentsModule,
     AppRoutingModule,
     NavfooterModule,
