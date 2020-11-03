@@ -9,26 +9,15 @@ RUN npm install
 # Copy source files
 COPY . .
 
-# Build ssr client
-RUN npm run build:ssr
+# Build static app files
+RUN npm run build
 
-FROM node:lts-alpine as ssr-npm
+FROM nginx
 WORKDIR /app
 
-# Copy build artifacts
-COPY --from=build /build/dist /app/dist
+# Copy build artifacts to NGINX public folder
+COPY --from=build /build/dist /usr/share/nginx/html
 
-# Install AngularFire for SSR support
-RUN npm install @angular/fire firebase
+COPY --from=build /build/nginx.conf /etc/nginx/conf.d/default.conf
 
-FROM node:lts-alpine
-
-WORKDIR /production
-
-COPY --from=ssr-npm /app /production
-
-# Expose web port
-EXPOSE 8080
-
-# Start SSR client
-CMD ["node", "dist/meowing-cf-logger-website/server/main.js"]
+EXPOSE 80
