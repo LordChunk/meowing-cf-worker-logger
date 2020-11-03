@@ -15,9 +15,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, {
-    initialNavigation: 'enabled'
-}),
+    RouterModule.forRoot(routes),
     BrowserModule,
   ],
 
