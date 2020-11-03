@@ -13,7 +13,9 @@ jobs:
         if: github.event_name != 'pull_request'
         shell: bash
         run: echo "BRANCH_NAME=$(echo ${GITHUB_REF#refs/heads/} | tr / -)" >> $GITHUB_ENV
-        
+  
+      - run: echo ${{ env.BRANCH_NAME }}
+
       - name: Replace master/main Branch Names with latest
         if: ${{ env.BRANCH_NAME }} == 'main' || ${{ env.BRANCH_NAME }} == 'master'
         shell: bash
