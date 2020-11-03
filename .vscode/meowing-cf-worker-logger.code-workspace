@@ -5,16 +5,9 @@
 			"name": "root"
 		},
 		{
-			"path": "..\\functions",
-		},
-		{
-			"path": "..\\website\\src\\app",
-			"name": "website-src"
-		},
-		{
-			"path": "..\\website",
-			"name": "website"
-		},
+			"path": "..\\src\\app",
+			"name": "src"
+		}
 	],
 	"settings": {}
 }
