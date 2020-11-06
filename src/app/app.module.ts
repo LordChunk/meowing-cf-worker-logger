@@ -15,6 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { environment } from 'src/environments/environment';
 import { AuthService } from './services/authentication.service';
+import { HttpRequestLogsService } from './services/http-request-logs.service';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { AuthService } from './services/authentication.service';
   bootstrap: [AppComponent],
   providers: [
     AuthService,
+    HttpRequestLogsService,
   ],
 })
 export class AppModule { }
