@@ -1,6 +1,7 @@
 export interface HttpLog {
   request: Request;
-  date: string;
+  // date: string;
+  RequestSize: number;
 }
 
 interface Request {

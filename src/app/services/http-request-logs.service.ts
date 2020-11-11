@@ -36,7 +36,6 @@ export class HttpRequestLogsService {
 
     // Start signalR connection
     this.startConnection();
-    // this.hubConnection.send('test');
     this.addLogUpdateListener();
    }
 
