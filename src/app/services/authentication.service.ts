@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 
-import { Observable, ReplaySubject } from 'rxjs';
+import { Observable, from, ReplaySubject } from 'rxjs';
 import { User } from '../models/user.model';
-import { distinctUntilChanged } from 'rxjs/operators';
+import { distinctUntilChanged, first } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -16,16 +16,17 @@ export class AuthService {
   constructor() {
   }
 
-  public login() {
+  public login(email: string, password: string) {
 
   }
 
-  public register() {
+  public register(email: string, password: string) {
   }
 
   public logout() {
   }
 
   isLoggedIn() {
+    return null;
   }
 }

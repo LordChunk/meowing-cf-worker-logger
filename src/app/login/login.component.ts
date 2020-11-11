@@ -29,15 +29,15 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.authService.login(
-      this.credentialsForm.value['email'],
-      this.credentialsForm.value['password'],
+      this.credentialsForm.value.email,
+      this.credentialsForm.value.password,
       );
   }
 
   register() {
     this.authService.register(
-      this.credentialsForm.value['email'],
-      this.credentialsForm.value['password'],
+      this.credentialsForm.value.email,
+      this.credentialsForm.value.password,
       );
   }
 
