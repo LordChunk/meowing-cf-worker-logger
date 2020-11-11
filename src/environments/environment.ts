@@ -14,7 +14,9 @@ export const environment = {
     storageBucket: 'meowing-cf-worker-logger.appspot.com',
     messagingSenderId: '290960042654',
     appId: '1:290960042654:web:25496dfa964f04ca5c298f'
-  }
+  },
+
+  apiEndPoint: 'https://127.0.0.1:5001/',
 };
 
 /*

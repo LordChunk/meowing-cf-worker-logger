@@ -1,7 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { AngularFireModule } from '@angular/fire';
-import { AngularFireStorageModule } from '@angular/fire/storage';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -13,8 +11,8 @@ import { ComponentsModule } from './components/components.module';
 
 import { HttpClientModule } from '@angular/common/http';
 
-import { environment } from 'src/environments/environment';
-import { AuthService } from './services/authentication.service';
+// import { AuthService } from './services/authentication.service';
+import { HttpRequestLogsService } from './services/http-request-logs.service';
 
 @NgModule({
   declarations: [
@@ -29,12 +27,11 @@ import { AuthService } from './services/authentication.service';
     DashboardModule,
     LoginModule,
     HttpClientModule,
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFireStorageModule,
   ],
   bootstrap: [AppComponent],
   providers: [
-    AuthService,
+    // AuthService,
+    HttpRequestLogsService,
   ],
 })
 export class AppModule { }

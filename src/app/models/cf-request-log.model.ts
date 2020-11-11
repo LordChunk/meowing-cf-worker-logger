@@ -1,9 +1,10 @@
-export interface CfRequestLog {
+export interface HttpLog {
   request: Request;
-  date: string;
+  // date: string;
+  RequestSize: number;
 }
 
-interface Request {
+export interface Request {
   url: string;
   cf: Cf;
   method: string;
