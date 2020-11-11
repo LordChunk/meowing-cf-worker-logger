@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
 
 import { Observable, from, ReplaySubject } from 'rxjs';
 import { User } from '../models/user.model';
