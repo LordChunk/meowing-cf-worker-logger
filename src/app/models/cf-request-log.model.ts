@@ -4,7 +4,7 @@ export interface HttpLog {
   RequestSize: number;
 }
 
-interface Request {
+export interface Request {
   url: string;
   cf: Cf;
   method: string;

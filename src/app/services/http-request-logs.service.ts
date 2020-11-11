@@ -1,22 +1,23 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable, ReplaySubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import * as signalR from '@aspnet/signalr';
 
 import { CountryInput } from '../components/country-pie/country-pie.component';
-import { HttpLog } from '../models/cf-request-log.model';
+import { Request } from '../models/cf-request-log.model';
 import { environment } from '../../environments/environment';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpRequestLogsService {
   // tslint:disable-next-line: variable-name
-  private _logs: ReplaySubject<HttpLog[]>;
-  get logs(): Observable<HttpLog[]> {
+  private _logs: ReplaySubject<Request[]>;
+  get logs(): Observable<Request[]> {
     return this._logs;
   }
+
   public countryCount: Observable<Array<CountryInput>>;
   public totalRequestCount: Observable<number>;
   public bandWidthTotal: Observable<number>;
@@ -24,7 +25,7 @@ export class HttpRequestLogsService {
 
   private hubConnection: signalR.HubConnection;
 
-  constructor(firestore: AngularFirestore) {
+  constructor(private http: HttpClient) {
     // this.logs = firestore.collection<CfRequestLog>('logs', ref => ref.limit(1000)).valueChanges();
     this._logs = new ReplaySubject(1);
 
@@ -34,12 +35,16 @@ export class HttpRequestLogsService {
     this.mapMostRequestedPaths();
     this.mapTotalRequestCount();
 
+    http.get<Request[]>(`${environment.apiEndPoint}api/httprequests`).subscribe(newLogs => {
+        this._logs.next(newLogs);
+    })
+
     // Start signalR connection
-    this.startConnection();
-    this.addLogUpdateListener();
+    // this.startConnection();
+    // this.addLogUpdateListener();
    }
 
-   private startConnection()  {
+   private startConnection(): void  {
      this.hubConnection = new signalR.HubConnectionBuilder()
       .withUrl(`${environment.apiEndPoint}hub/http-request`)
       .build();
@@ -58,8 +63,8 @@ export class HttpRequestLogsService {
 
    private mapCountryCount(): void {
     this.countryCount = this.logs.pipe(
-      map(logArray => {
-        const countries = logArray.map(log => log.request.cf?.country);
+      map(requestArray => {
+        const countries = requestArray.map(request => request.cf.country);
         const countryNameCount: Array<CountryInput> = [];
 
         countries.forEach(countryName => {
@@ -80,7 +85,7 @@ export class HttpRequestLogsService {
     this.bandWidthTotal = this.logs.pipe(
       map(logArray => {
         let byteCount = 0;
-        logArray.forEach(log => byteCount += +log.request.contentLength);
+        logArray.forEach(log => byteCount += +log.contentLength);
         return byteCount;
       }));
    }
@@ -90,7 +95,7 @@ export class HttpRequestLogsService {
       map(logArray => {
         const mostRequestedArray: Array<{ path: string, count: number }> = [];
         logArray.forEach((log, i) => {
-          const url = log.request.url.split('https://meowingdalmatian.chu.mk/').pop().split('?')[0];
+          const url = log.url.split('https://meowingdalmatian.chu.mk/').pop().split('?')[0];
           const requestItem = mostRequestedArray.find(item => item.path === url);
           if (requestItem !== undefined) {
             requestItem.count++;
