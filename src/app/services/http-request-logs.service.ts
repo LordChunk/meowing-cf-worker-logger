@@ -1,29 +1,61 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
+import { Observable, ReplaySubject } from 'rxjs';
 import { map } from 'rxjs/operators';
+import * as signalR from '@aspnet/signalr';
+
 import { CountryInput } from '../components/country-pie/country-pie.component';
-import { CfRequestLog } from '../models/cf-request-log.model';
+import { HttpLog } from '../models/cf-request-log.model';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpRequestLogsService {
-  public logs: Observable<CfRequestLog[]>;
+  // tslint:disable-next-line: variable-name
+  private _logs: ReplaySubject<HttpLog[]>;
+  get logs(): Observable<HttpLog[]> {
+    return this._logs;
+  }
   public countryCount: Observable<Array<CountryInput>>;
   public totalRequestCount: Observable<number>;
   public bandWidthTotal: Observable<number>;
   public mostRequestedPaths: Observable<Array<{ path: string, count: number }>>;
 
+  private hubConnection: signalR.HubConnection;
+
   constructor(firestore: AngularFirestore) {
-    this.logs = firestore.collection<CfRequestLog>('logs', ref => ref.limit(1000)).valueChanges();
+    // this.logs = firestore.collection<CfRequestLog>('logs', ref => ref.limit(1000)).valueChanges();
+    this._logs = new ReplaySubject(1);
 
     // Run methods to map all public variables
     this.mapCountryCount();
     this.mapBandWidthTotal();
     this.mapMostRequestedPaths();
     this.mapTotalRequestCount();
+
+    // Start signalR connection
+    this.startConnection();
+    // this.hubConnection.send('test');
+    this.addLogUpdateListener();
    }
+
+   private startConnection()  {
+     this.hubConnection = new signalR.HubConnectionBuilder()
+      .withUrl(`${environment.apiEndPoint}hub/http-request`)
+      .build();
+
+     this.hubConnection.start()
+        .then(console.log)
+        .catch(console.error);
+   }
+
+   public addLogUpdateListener = () => {
+     this.hubConnection.on('GetLogUpdates', (data: number[]) => {
+      console.log(data);
+     });
+   }
+
 
    private mapCountryCount(): void {
     this.countryCount = this.logs.pipe(

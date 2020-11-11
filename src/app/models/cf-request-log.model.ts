@@ -1,4 +1,4 @@
-export interface CfRequestLog {
+export interface HttpLog {
   request: Request;
   date: string;
 }
