@@ -62,24 +62,26 @@ async function handleRequest(event) {
       let loggableRequest = JSON.parse(JSON.stringify(request));
       const headerMap = [...request.headers];
 
+      // Make request with headers as mapped entities
       const requestWithHeaderMap = loggableRequest;
       requestWithHeaderMap.headers = headerMap;
-
-      // Send log for ASP .NET client
-      event.waitUntil(postLog(requestWithHeaderMap, false));
-
-      // Convert header map to an array of header objects
-      let headerObjectList = {};
-      for (i = 0; i < headerMap.length; i++) {
-        const headerMapItem = headerMap[i];
-        headerObjectList[headerMapItem[0]] = headerMapItem[1];
-      }
-      loggableRequest.headers = headerObjectList;
 
       // Log approximate size of request
       loggableRequest.contentLength = response.headers.get("content-length");
 
-      event.waitUntil(postLog(loggableRequest, true));
+      // Send log for ASP .NET client
+      event.waitUntil(postLog(requestWithHeaderMap, false));
+
+    // OLD LOGGING CODE
+    //   // Convert header map to an array of header objects
+    //   let headerObjectList = {};
+    //   for (i = 0; i < headerMap.length; i++) {
+    //     const headerMapItem = headerMap[i];
+    //     headerObjectList[headerMapItem[0]] = headerMapItem[1];
+    //   }
+    //   loggableRequest.headers = headerObjectList;
+
+    //   event.waitUntil(postLog(loggableRequest, true));
     } catch (e) {
       console.log("Logging error");
       console.log(e);
