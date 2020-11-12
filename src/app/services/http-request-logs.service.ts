@@ -35,7 +35,7 @@ export class HttpRequestLogsService {
     this.mapMostRequestedPaths();
     this.mapTotalRequestCount();
 
-    http.get<Request[]>(`${environment.apiEndPoint}api/httprequests`).subscribe(newLogs => {
+    http.get<Request[]>(`${environment.apiEndPoint}httprequests`).subscribe(newLogs => {
         this._logs.next(newLogs);
     })
 
