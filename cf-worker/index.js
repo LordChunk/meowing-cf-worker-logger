@@ -1,6 +1,5 @@
-const LOG_URL =
-  "https://europe-west1-meowing-cf-worker-logger.cloudfunctions.net/api/logrequest";
-const DEV_LOG_URL = "https://local.chu.mk/api/httprequests";
+const LOG_URL = "https://europe-west1-meowing-cf-worker-logger.cloudfunctions.net/api/logrequest";
+const DEV_LOG_URL = "https://meowing-api.chu.mk/api/httprequests";
 const PUBLIC_URL = "https://meowingdalmatian.chu.mk/public/";
 
 async function postLog(data, production) {
