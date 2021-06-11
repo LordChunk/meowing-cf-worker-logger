@@ -38,7 +38,7 @@ jobs:
       #   run: npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
 
       - name: Build Angular App
-        run: yan run build
+        run: yarn run build
 
       - name: Upload Build Folder
         uses: actions/upload-artifact@v2.2.2
