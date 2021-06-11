@@ -3,7 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+
+  appName: 'Meowing Cloudflare Worker Logger Website',
+
+  apiEndPoint: 'https://127.0.0.1:5001/',
 };
 
 /*

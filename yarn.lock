@@ -128,6 +128,15 @@
   dependencies:
     tslib "^2.1.0"
 
+"@angular/cdk@~12.0.2-sha-48d2df2428":
+  version "12.0.4"
+  resolved "https://registry.yarnpkg.com/@angular/cdk/-/cdk-12.0.4.tgz#074f17dc3f3f2ed054dace5ea2d6c89126e000df"
+  integrity sha512-NX/1kEc6ndyEHjGcMtMJYEjwmoURuwRSqKJLbGcHTUwXuuR+hfDP/vU1XDOeXNC80SV+0B4BpJnREkINILfYKw==
+  dependencies:
+    tslib "^2.1.0"
+  optionalDependencies:
+    parse5 "^5.0.0"
+
 "@angular/cli@~12.0.4":
   version "12.0.4"
   resolved "https://registry.yarnpkg.com/@angular/cli/-/cli-12.0.4.tgz#766d471e7486a9e51297278b3a8afdbc96265ab4"
@@ -199,6 +208,13 @@
   version "12.0.4"
   resolved "https://registry.yarnpkg.com/@angular/forms/-/forms-12.0.4.tgz#50f62a5a3984112f3f2568ab6cd9df1b38096095"
   integrity sha512-700j7RNGdQhGrIUMwSgP1DxT35JlYmAdmmKK2mZl2bfQwZw1xKwyG9XgbLGiaJbFoG3nLLiUgJFonA+xS4nU6w==
+  dependencies:
+    tslib "^2.1.0"
+
+"@angular/material@~12.0.2-sha-48d2df2428":
+  version "12.0.4"
+  resolved "https://registry.yarnpkg.com/@angular/material/-/material-12.0.4.tgz#0cd88328f846d7ba6485abc7f1888aef174d7e4c"
+  integrity sha512-pvfYEeUCLR7EmA6R/kkXz5jfl+RHwh3AS9X9kWARWIOzA7p0hG9ApoFT5KCofTBNp0nukau1QoGR4WGla6wWvQ==
   dependencies:
     tslib "^2.1.0"
 
@@ -2172,6 +2188,11 @@ chardet@^0.7.0:
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/chardet/-/chardet-0.7.0.tgz#90094849f0937f2eedc2425d0d28a9e5f0cbad9e"
   integrity sha512-mT8iDcrh03qDGRRmoA2hmBJnxpllMR+0/0qlzjqZES6NdiWDcZkCNAk4rPFZ9Q85r27unkiNNg8ZOiwZXBHwcA==
+
+chart.js@^3.3.2:
+  version "3.3.2"
+  resolved "https://registry.yarnpkg.com/chart.js/-/chart.js-3.3.2.tgz#667f3a0b6371b9719d8949c04a5bcbaec0d8c615"
+  integrity sha512-H0hSO7xqTIrwxoACqnSoNromEMfXvfuVnrbuSt2TuXfBDDofbnto4zuZlRtRvC73/b37q3wGAWZyUU41QPvNbA==
 
 "chokidar@>=3.0.0 <4.0.0", chokidar@^3.0.0, chokidar@^3.4.2:
   version "3.5.1"
@@ -4561,6 +4582,11 @@ locate-path@^5.0.0:
   dependencies:
     p-locate "^4.1.0"
 
+lodash-es@^4.17.15:
+  version "4.17.21"
+  resolved "https://registry.yarnpkg.com/lodash-es/-/lodash-es-4.17.21.tgz#43e626c46e6591b7750beb2b50117390c609e3ee"
+  integrity sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw==
+
 lodash.debounce@^4.0.8:
   version "4.0.8"
   resolved "https://registry.yarnpkg.com/lodash.debounce/-/lodash.debounce-4.0.8.tgz#82d79bff30a67c4005ffd5e2515300ad9ca4d7af"
@@ -4984,6 +5010,14 @@ neo-async@^2.6.2:
   version "2.6.2"
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.2.tgz#b4aafb93e3aeb2d8174ca53cf163ab7d7308305f"
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
+
+ng2-charts@^3.0.0-rc.2:
+  version "3.0.0-rc.2"
+  resolved "https://registry.yarnpkg.com/ng2-charts/-/ng2-charts-3.0.0-rc.2.tgz#03813dde20e22f7078d56c8a03761be57547b890"
+  integrity sha512-9Iry4kWjf4lamXlcxPBGV3T61kMa+uPtbMGbMaMrUZ+yLO//Dco7MxwIB+mt4s6dve3ExP805ukDP/nowkznYQ==
+  dependencies:
+    lodash-es "^4.17.15"
+    tslib "^2.1.0"
 
 nice-try@^1.0.4:
   version "1.0.5"
@@ -5409,6 +5443,11 @@ parse5-sax-parser@^6.0.1:
   integrity sha512-kXX+5S81lgESA0LsDuGjAlBybImAChYRMT+/uKCEXFBFOeEhS52qUCydGhU3qLRD8D9DVjaUo821WK7DM4iCeg==
   dependencies:
     parse5 "^6.0.1"
+
+parse5@^5.0.0:
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/parse5/-/parse5-5.1.1.tgz#f68e4e5ba1852ac2cadc00f4555fff6c2abb6178"
+  integrity sha512-ugq4DFI0Ptb+WWjAdOK16+u/nHfiIrcE+sh8kZMaM0WllQKLI9rOUq6c2b7cwPkXdzfQESqvoqK6ug7U/Yyzug==
 
 parse5@^6.0.1:
   version "6.0.1"

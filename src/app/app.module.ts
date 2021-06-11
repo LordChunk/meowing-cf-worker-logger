@@ -1,18 +1,32 @@
-import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NavfooterModule } from './navfooter/navfooter.module';
+import { DashboardModule } from './dashboard/dashboard.module';
+import { ComponentsModule } from './components/components.module';
+
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    ComponentsModule,
+    AppRoutingModule,
+    NavfooterModule,
+    BrowserAnimationsModule,
+    DashboardModule,
+    HttpClientModule,
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  providers: [
+    // HttpRequestLogsService,
+  ],
 })
 export class AppModule { }
