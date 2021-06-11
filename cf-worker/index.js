@@ -1,32 +1,14 @@
-const LOG_URL = "https://europe-west1-meowing-cf-worker-logger.cloudfunctions.net/api/logrequest";
-const DEV_LOG_URL = "https://meowing-api.chu.mk/httprequests";
+const LOG_URL = "https://meowing-api.chu.mk/httprequests";
 const PUBLIC_URL = "https://meowingdalmatian.chu.mk/public/";
 
-async function postLog(data, production) {
-    return fetch(DEV_LOG_URL, {
+async function postLog(data) {
+    return fetch(LOG_URL, {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
         "Content-Type": "application/json",
       },
     });
-//   if (!production) {
-//     return fetch(DEV_LOG_URL, {
-//       method: "POST",
-//       body: JSON.stringify(data),
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//     });
-//   } else {
-//     return fetch(LOG_URL, {
-//       method: "POST",
-//       body: JSON.stringify(data),
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//     });
-//   }
 }
 
 async function handleRequest(event) {
@@ -79,9 +61,7 @@ async function handleRequest(event) {
       loggableRequest.contentLength = response.headers.get("content-length");
 
       // Send log for ASP .NET client
-      event.waitUntil(postLog(requestWithHeaderMap, false));
-
-    //   event.waitUntil(postLog(loggableRequest, true));
+      event.waitUntil(postLog(requestWithHeaderMap));
     } catch (e) {
       console.log("Logging error");
       console.log(e);
