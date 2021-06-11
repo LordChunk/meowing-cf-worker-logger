@@ -3,8 +3,8 @@ WORKDIR /build
 
 # Install all dependencies
 COPY package*.json ./
-RUN npm install -g @angular/cli
-RUN npm install
+RUN yarn global add @angular/cli
+RUN yarn install
 
 # Copy source files
 COPY . .
