@@ -4,13 +4,13 @@ WORKDIR /build
 # Install all dependencies
 COPY package*.json ./
 RUN yarn global add @angular/cli
-RUN yarn install
+RUN yarn install --frozen-lockfile
 
 # Copy source files
 COPY . .
 
 # Build static app files
-RUN npm run build
+RUN yarn run build
 
 FROM nginx
 WORKDIR /app
