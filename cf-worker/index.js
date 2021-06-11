@@ -1,9 +1,8 @@
 const LOG_URL = "https://europe-west1-meowing-cf-worker-logger.cloudfunctions.net/api/logrequest";
-const DEV_LOG_URL = "https://meowing-api.chu.mk/api/httprequests";
+const DEV_LOG_URL = "https://meowing-api.chu.mk/httprequests";
 const PUBLIC_URL = "https://meowingdalmatian.chu.mk/public/";
 
 async function postLog(data, production) {
-  if (!production) {
     return fetch(DEV_LOG_URL, {
       method: "POST",
       body: JSON.stringify(data),
@@ -11,15 +10,23 @@ async function postLog(data, production) {
         "Content-Type": "application/json",
       },
     });
-  } else {
-    return fetch(LOG_URL, {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-  }
+//   if (!production) {
+//     return fetch(DEV_LOG_URL, {
+//       method: "POST",
+//       body: JSON.stringify(data),
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//     });
+//   } else {
+//     return fetch(LOG_URL, {
+//       method: "POST",
+//       body: JSON.stringify(data),
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//     });
+//   }
 }
 
 async function handleRequest(event) {
@@ -44,6 +51,7 @@ async function handleRequest(event) {
     url = request;
   }
 
+
   let response = await fetch(url, {
     ...request.headers,
     cf: {
@@ -51,6 +59,7 @@ async function handleRequest(event) {
       cacheEverything: true,
     },
   });
+
   // Reconstruct the Response object to make its headers mutable.
   response = new Response(response.body, response);
   //Set cache control headers to cache on browser for 25 minutes
@@ -72,21 +81,13 @@ async function handleRequest(event) {
       // Send log for ASP .NET client
       event.waitUntil(postLog(requestWithHeaderMap, false));
 
-    // OLD LOGGING CODE
-    //   // Convert header map to an array of header objects
-    //   let headerObjectList = {};
-    //   for (i = 0; i < headerMap.length; i++) {
-    //     const headerMapItem = headerMap[i];
-    //     headerObjectList[headerMapItem[0]] = headerMapItem[1];
-    //   }
-    //   loggableRequest.headers = headerObjectList;
-
     //   event.waitUntil(postLog(loggableRequest, true));
     } catch (e) {
       console.log("Logging error");
       console.log(e);
     }
   }
+
 
   return response;
 }
