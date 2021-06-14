@@ -4,7 +4,6 @@
 
 export const environment = {
   production: false,
-
   appName: 'Meowing Cloudflare Worker Logger Website',
 
   // apiEndPoint: 'https://127.0.0.1:5001',
