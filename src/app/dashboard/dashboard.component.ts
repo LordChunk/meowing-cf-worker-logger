@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
+import { StatisticsService } from '../src/services/api/services';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,8 +9,14 @@ import { Observable, of } from 'rxjs';
 })
 export class DashboardComponent implements OnInit {
 
+  public statisticsService: StatisticsService;
+
+  constructor(statisticsService: StatisticsService){
+    this.statisticsService = statisticsService;
+  }
 
   ngOnInit(): void {
+    this.statisticsService.statisticsRequestsPerCountryGet$Json().subscribe(console.log)
   }
 
 

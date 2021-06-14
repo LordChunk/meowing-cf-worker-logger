@@ -9,6 +9,7 @@ import { DashboardModule } from './dashboard/dashboard.module';
 import { ComponentsModule } from './components/components.module';
 
 import { HttpClientModule } from '@angular/common/http';
+import { ApiModule } from './src/services/api/api.module';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     DashboardModule,
     HttpClientModule,
+    ApiModule,
   ],
   bootstrap: [AppComponent],
   providers: [

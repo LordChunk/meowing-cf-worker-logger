@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "generate-api-service": "ng-openapi-gen --input https://meowing-api.chu.mk/swagger/v1/swagger.json --output ./src/services/api"
   },
   "private": true,
   "dependencies": {
