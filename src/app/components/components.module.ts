@@ -7,9 +7,12 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { LayoutModule } from '@angular/cdk/layout';
+import { CountryPieComponent } from './country-pie/country-pie.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    CountryPieComponent
+  ],
   imports: [
     ChartsModule,
     CommonModule,
@@ -21,6 +24,7 @@ import { LayoutModule } from '@angular/cdk/layout';
     LayoutModule
   ],
   exports: [
+    CountryPieComponent,
   ],
 })
 export class ComponentsModule { }
