@@ -5,8 +5,6 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavfooterModule } from './navfooter/navfooter.module';
-import { DashboardModule } from './dashboard/dashboard.module';
-import { ComponentsModule } from './components/components.module';
 
 import { HttpClientModule } from '@angular/common/http';
 import { ApiModule } from '../services/api/api.module';
@@ -18,17 +16,14 @@ import { ApiModule } from '../services/api/api.module';
   ],
   imports: [
     BrowserModule,
-    ComponentsModule,
     AppRoutingModule,
     NavfooterModule,
     BrowserAnimationsModule,
-    DashboardModule,
-    HttpClientModule,
     ApiModule,
+    HttpClientModule
   ],
   bootstrap: [AppComponent],
   providers: [
-    // HttpRequestLogsService,
   ],
 })
 export class AppModule { }

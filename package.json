@@ -5,7 +5,7 @@
     "ng": "ng",
     "dev": "ng serve & dotnet run --project ../meowing-cf-logger-api/API",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build --build-optimizer",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "generate-api-service": "ng-openapi-gen --input https://meowing-api.chu.mk/swagger/v1/swagger.json --output ./src/services/api --skipJsonSuffix true"
