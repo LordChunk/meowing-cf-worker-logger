@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
+    "dev": "ng serve & dotnet run --project ../meowing-cf-logger-api/API",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
