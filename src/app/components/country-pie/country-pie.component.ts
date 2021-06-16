@@ -12,6 +12,10 @@ import { StatisticsService } from 'src/services/api/services';
 export class CountryPieComponent {
   public pieChartOptions: ChartOptions = {
     responsive: true,
+    legend: {
+      fullWidth: true,
+      position: 'left',
+    }
   };
 
   public pieChartLabels: Label[] = [];
@@ -30,7 +34,7 @@ export class CountryPieComponent {
       res.forEach((reqPerCountry: {country: string, count: number  }, i: number) => {
         if(i > 10) {
           this.pieChartData[10] = this.pieChartData[10] + reqPerCountry.count;
-          this.pieChartLabels[10] = "Remaining countries"
+          this.pieChartLabels[10] = "Other"
         } else {
           this.pieChartLabels.push(reqPerCountry.country);
           this.pieChartData.push(reqPerCountry.count);

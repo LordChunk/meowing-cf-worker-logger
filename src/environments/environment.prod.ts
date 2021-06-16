@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  appName: 'Meowing Cloudflare Worker Logger Website',
+  appName: 'Meowing Logger Dashboard',
   apiEndPoint: 'https://meowing-api.chu.mk',
 };
