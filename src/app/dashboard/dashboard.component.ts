@@ -14,9 +14,6 @@ export class DashboardComponent implements OnInit {
   public RequestsPerUrl: PieChartInput[] = [];
   public readonly ReqPerUrlChartOpts: ChartOptions = {
     responsive: true,
-    legend: {
-      display: false,
-    }
   }
 
   private statisticsService: StatisticsService;
