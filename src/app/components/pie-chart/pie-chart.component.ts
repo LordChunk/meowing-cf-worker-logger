@@ -29,8 +29,6 @@ export class PieChartComponent implements OnChanges {
         this.pieChartData[0].data.push(chartInput.value);
         this.pieChartLabels.push(chartInput.label);
       });
-
-      console.log(this.pieChartData);
     }
   }
 }

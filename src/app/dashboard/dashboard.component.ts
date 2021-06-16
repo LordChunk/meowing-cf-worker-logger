@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ChartOptions } from 'chart.js';
 import { StatisticsService } from 'src/services/api/services';
 import { PieChartInput } from '../components/pie-chart/pie-chart.component';
+import { TreemapChartInput } from '../components/treemap-chart/treemap-chart.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,7 +12,7 @@ import { PieChartInput } from '../components/pie-chart/pie-chart.component';
 export class DashboardComponent implements OnInit {
 
   public RequestsPerCountry: PieChartInput[] = [];
-  public RequestsPerUrl: PieChartInput[] = [];
+  public RequestsPerUrl: TreemapChartInput[] = [];
   public readonly ReqPerUrlChartOpts: ChartOptions = {
     responsive: true,
   }
@@ -45,15 +46,17 @@ export class DashboardComponent implements OnInit {
     // Fetch data for most popular URLs
     const maxUrls = 20;
     this.statisticsService.statisticsRequestsPerUrlGet().subscribe((res) => {
-      const reqPerUrl: PieChartInput[] = [];
+      const reqPerUrl: TreemapChartInput[] = [];
       res.forEach((reqUrl: {url: string, count: number }, i: number): any => {
         if(i >= maxUrls) {
-          reqPerUrl[maxUrls - 1].value = reqPerUrl[maxUrls - 1].value + reqUrl.count;
-          reqPerUrl[maxUrls - 1].label = "Other"
+          // reqPerUrl[maxUrls - 1].value = reqPerUrl[maxUrls - 1].value + reqUrl.count;
+          // reqPerUrl[maxUrls - 1].label = "Other"
+          // reqPerUrl[maxUrls - 1].shortLabel = "Other"
         } else {
           reqPerUrl.push({
             label: reqUrl.url,
             value: reqUrl.count,
+            shortLabel: reqUrl.url.split('/').pop() || '',
           });
         }
       });

@@ -1,11 +1,17 @@
 <div class="wrapper">
+
+  <div class="country-pie-wrapper">
+    <h2>Top 20 Most Requested URLs</h2>
+    <app-treemap-chart [ChartData]="RequestsPerUrl"></app-treemap-chart>
+  </div>
+
   <div class="country-pie-wrapper">
     <h2>Requests per country</h2>
     <app-pie-chart [ChartData]="RequestsPerCountry"></app-pie-chart>
   </div>
 
-  <div class="country-pie-wrapper">
+  <!-- <div class="country-pie-wrapper">
     <h2>Requests per URL</h2>
     <app-pie-chart [ChartData]="RequestsPerUrl" [ChartOptions]="ReqPerUrlChartOpts"></app-pie-chart>
-  </div>
+  </div> -->
 </div>
