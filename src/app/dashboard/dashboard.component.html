@@ -3,4 +3,9 @@
     <h2>Requests per country</h2>
     <app-pie-chart [ChartData]="RequestsPerCountry"></app-pie-chart>
   </div>
+
+  <div class="country-pie-wrapper">
+    <h2>Requests per URL</h2>
+    <app-pie-chart [ChartData]="RequestsPerUrl" [ChartOptions]="ReqPerUrlChartOpts"></app-pie-chart>
+  </div>
 </div>

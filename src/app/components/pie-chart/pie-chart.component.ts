@@ -9,9 +9,7 @@ import { Label } from 'ng2-charts';
 })
 export class PieChartComponent implements OnChanges {
   @Input() ChartData: PieChartInput[] = []
-  @Input() Nothing: any = null;
-
-  public pieChartOptions: ChartOptions = {
+  @Input() ChartOptions: ChartOptions = {
     responsive: true,
     legend: {
       fullWidth: true,
