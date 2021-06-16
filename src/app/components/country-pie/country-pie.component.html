@@ -1,4 +1,4 @@
-<div>
+<div [class.loading]="pieChartData.length == 0">
   <canvas baseChart
     responsive
     [data]="pieChartData"

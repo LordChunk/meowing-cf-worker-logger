@@ -1,7 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { ChartOptions, ChartType } from 'chart.js';
-import { Label, SingleDataSet } from 'ng2-charts';
-import { Observable, of } from 'rxjs';
+import { Label } from 'ng2-charts';
 import { StatisticsService } from 'src/services/api/services';
 
 @Component({
