@@ -4,7 +4,7 @@ import { ChartData, ChartDataset, ChartOptions, ChartType } from 'chart.js';
 @Component({
   selector: 'app-pie-chart',
   templateUrl: './pie-chart.component.html',
-  styleUrls: ['./pie-chart.component.scss'],
+  styleUrls: ['./pie-chart.component.scss', '../chart-loading-background.scss'],
 })
 export class PieChartComponent implements OnChanges {
   @Input() ChartData: PieChartInput[] = []

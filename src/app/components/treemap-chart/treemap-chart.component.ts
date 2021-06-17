@@ -8,7 +8,7 @@ import { PieChartInput } from '../pie-chart/pie-chart.component';
 @Component({
   selector: 'app-treemap-chart',
   templateUrl: './treemap-chart.component.html',
-  styleUrls: ['./treemap-chart.component.scss']
+  styleUrls: ['./treemap-chart.component.scss', '../chart-loading-background.scss']
 })
 export class TreemapChartComponent implements AfterViewInit {
 
