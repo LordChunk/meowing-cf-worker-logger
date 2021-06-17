@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ComponentFactoryResolver, Injector, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { ChartOptions } from 'chart.js';
 import { StatisticsService } from 'src/services/api/services';
 import { PieChartInput } from '../components/pie-chart/pie-chart.component';
@@ -17,11 +17,14 @@ export class DashboardComponent implements OnInit {
     responsive: true,
   }
 
-  private statisticsService: StatisticsService;
+  @ViewChild('urlListWrapper', { read: ViewContainerRef }) urlListWrapper!: ViewContainerRef;
+  private isUrlListWrapperInstantiated = false;
 
-  constructor(statisticsService: StatisticsService) {
-    this.statisticsService = statisticsService;
-  }
+  constructor(
+    private statisticsService: StatisticsService,
+    private cfr: ComponentFactoryResolver,
+    private injector: Injector,
+  ) { }
 
   ngOnInit(): void {
     // Fetch data for requests per country
@@ -63,5 +66,13 @@ export class DashboardComponent implements OnInit {
 
       this.RequestsPerUrl = reqPerUrl;
     })
+  }
+
+  public async lazyLoadComponent() {
+    if (this.isUrlListWrapperInstantiated) return;
+    const { UrlListComponent } = await import('../components/url-list/url-list.component');
+    const urlListFactory = this.cfr.resolveComponentFactory(UrlListComponent);
+    const { instance } = this.urlListWrapper.createComponent(urlListFactory, undefined, this.injector)
+    this.isUrlListWrapperInstantiated = true;
   }
 }
