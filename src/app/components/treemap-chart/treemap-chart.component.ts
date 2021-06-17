@@ -45,15 +45,11 @@ export class TreemapChartComponent implements AfterViewInit {
           tooltip: {
             callbacks: {
               title: (item: any) => {
-                let i = item[0].dataIndex - 1;
-                if(i < 0) i = item[0].dataset.tree.length - 1;
-
+                let i = item[0].dataIndex;
                 return item[0].dataset.tree[i].shortLabel;
               },
               label: (item: any) => {
-                let i = item.dataIndex - 1;
-                if(i < 0) i = item.dataset.tree.length - 1;
-
+                let i = item.dataIndex;
                 return [`URL: ${item.dataset.tree[i].label}`, `Requests: ${item.dataset.tree[i].value}`];
               },
             }
