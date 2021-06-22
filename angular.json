@@ -20,7 +20,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist",
+            "outputPath": "dist/meowing-cf-dashboard/browser",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -108,6 +108,65 @@
             ],
             "scripts": []
           }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/meowing-cf-dashboard/server",
+            "main": "server.ts",
+            "tsConfig": "tsconfig.server.json",
+            "inlineStyleLanguage": "scss"
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "media",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ]
+            },
+            "development": {
+              "optimization": false,
+              "sourceMap": true,
+              "extractLicenses": false
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve-ssr": {
+          "builder": "@nguniversal/builders:ssr-dev-server",
+          "configurations": {
+            "development": {
+              "browserTarget": "meowing-cf-dashboard:build:development",
+              "serverTarget": "meowing-cf-dashboard:server:development"
+            },
+            "production": {
+              "browserTarget": "meowing-cf-dashboard:build:production",
+              "serverTarget": "meowing-cf-dashboard:server:production"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "prerender": {
+          "builder": "@nguniversal/builders:prerender",
+          "options": {
+            "routes": [
+              "/"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "meowing-cf-dashboard:build:production",
+              "serverTarget": "meowing-cf-dashboard:server:production"
+            },
+            "development": {
+              "browserTarget": "meowing-cf-dashboard:build:development",
+              "serverTarget": "meowing-cf-dashboard:server:development"
+            }
+          },
+          "defaultConfiguration": "production"
         }
       }
     }
