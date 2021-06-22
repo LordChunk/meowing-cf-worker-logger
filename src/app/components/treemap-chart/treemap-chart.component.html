@@ -1,4 +1,4 @@
-<div [class.loading]="this.ChartData.length == 0">
+<div [class.loading]="this.ChartData.length == 0" *ngIf="isBrowser" >
   <canvas #treemap>
   </canvas>
 </div>
