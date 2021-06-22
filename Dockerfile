@@ -9,15 +9,16 @@ RUN yarn install --frozen-lockfile
 # Copy source files
 COPY . .
 
-# Build static app files
-RUN yarn run build
+# Build ssr and static app files
+RUN yarn run build:ssr
 
-FROM nginx
+FROM node:lts-alpine
 WORKDIR /app
 
-# Copy build artifacts to NGINX public folder
-COPY --from=build /build/dist /usr/share/nginx/html
+# Copy build artifacts
+COPY --from=build /build/dist ./dist
+COPY --from=build /build/package.json ./
 
-COPY --from=build /build/nginx.conf /etc/nginx/conf.d/default.conf
+ENTRYPOINT yarn run serve:ssr
 
-EXPOSE 80
+EXPOSE 4000
