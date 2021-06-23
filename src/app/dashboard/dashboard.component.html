@@ -11,15 +11,8 @@
     <app-pie-chart [ChartData]="RequestsPerCountry"></app-pie-chart>
   </div>
 
-  <div class="country-pie-wrapper" (click)="lazyLoadComponent()">
+  <!-- <div class="country-pie-wrapper">
     <h2>Requests per URL</h2>
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        This is the expansion title
-      </mat-expansion-panel-header>
-
-      <ng-template matExpansionPanelContent #urlListWrapper>
-      </ng-template>
-    </mat-expansion-panel>
-  </div>
+    <app-pie-chart [ChartData]="RequestsPerUrl" [ChartOptions]="ReqPerUrlChartOpts"></app-pie-chart>
+  </div> -->
 </div>

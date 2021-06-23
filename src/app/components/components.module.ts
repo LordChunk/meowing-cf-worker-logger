@@ -4,11 +4,10 @@ import { ChartsModule } from 'ng2-charts';
 import { PieChartComponent } from './pie-chart/pie-chart.component';
 import { TreemapChartComponent } from './treemap-chart/treemap-chart.component';
 
-
 @NgModule({
   declarations: [
     PieChartComponent,
-    TreemapChartComponent,
+    TreemapChartComponent
   ],
   imports: [
     ChartsModule,
@@ -16,7 +15,7 @@ import { TreemapChartComponent } from './treemap-chart/treemap-chart.component';
   ],
   exports: [
     PieChartComponent,
-    TreemapChartComponent,
+    TreemapChartComponent
   ],
 })
 export class ComponentsModule { }
