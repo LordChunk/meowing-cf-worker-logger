@@ -1,4 +1,4 @@
-<table mat-table [dataSource]="ListData" matSort>
+<table mat-table [dataSource]="ListData" matSort (matSortChange)="sortData($event)">
 
   <!-- Name Column -->
   <ng-container matColumnDef="shortLabel">
