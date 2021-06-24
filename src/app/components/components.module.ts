@@ -3,19 +3,27 @@ import { CommonModule } from '@angular/common';
 import { ChartsModule } from 'ng2-charts';
 import { PieChartComponent } from './pie-chart/pie-chart.component';
 import { TreemapChartComponent } from './treemap-chart/treemap-chart.component';
+import { UrlListComponent } from './url-list/url-list.component';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
+
 
 @NgModule({
   declarations: [
     PieChartComponent,
-    TreemapChartComponent
+    TreemapChartComponent,
+    UrlListComponent
   ],
   imports: [
     ChartsModule,
     CommonModule,
+    MatSortModule,
+    MatTableModule,
   ],
   exports: [
     PieChartComponent,
-    TreemapChartComponent
+    TreemapChartComponent,
+    UrlListComponent,
   ],
 })
 export class ComponentsModule { }

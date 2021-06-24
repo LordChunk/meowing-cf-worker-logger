@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "dev": "ng serve & yarn run generate-api-service",
+    "dev": "ng serve & yarn run serve:api",
     "start": "ng serve",
     "build": "ng build --build-optimizer",
     "watch": "ng build --watch --configuration development",

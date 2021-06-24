@@ -1,18 +1,25 @@
 <div class="wrapper">
-
   <div class="country-pie-wrapper">
     <h2>Top 20 Most Requested URLs</h2>
-    <!-- <app-treemap-chart></app-treemap-chart> -->
-    <app-treemap-chart [ChartData]="RequestsPerUrl"></app-treemap-chart>
+    <app-treemap-chart [ChartData]="TreemapChartInput"></app-treemap-chart>
   </div>
 
   <div class="country-pie-wrapper">
     <h2>Requests per country</h2>
-    <app-pie-chart [ChartData]="RequestsPerCountry"></app-pie-chart>
+    <app-pie-chart [ChartData]="PieChartInput"></app-pie-chart>
   </div>
 
-  <!-- <div class="country-pie-wrapper">
+  <div class="country-pie-wrapper">
     <h2>Requests per URL</h2>
-    <app-pie-chart [ChartData]="RequestsPerUrl" [ChartOptions]="ReqPerUrlChartOpts"></app-pie-chart>
-  </div> -->
+    <app-url-list [ListData]="UrlListInput"></app-url-list>
+
+    <!-- <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        Requests per URL
+      </mat-expansion-panel-header>
+      <ng-template matExpansionPanelContent #urlListWrapper>
+        <app-url-list [ListData]="UrlListInput"></app-url-list>
+      </ng-template>
+    </mat-expansion-panel> -->
+  </div>
 </div>

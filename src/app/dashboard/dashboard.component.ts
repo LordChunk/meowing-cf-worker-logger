@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ChartOptions } from 'chart.js';
+import { BehaviorSubject } from 'rxjs';
 import { StatisticsService } from 'src/services/api/services';
 import { PieChartInput } from '../components/pie-chart/pie-chart.component';
 import { TreemapChartInput } from '../components/treemap-chart/treemap-chart.component';
@@ -11,8 +12,10 @@ import { TreemapChartInput } from '../components/treemap-chart/treemap-chart.com
 })
 export class DashboardComponent implements OnInit {
 
-  public RequestsPerCountry: PieChartInput[] = [];
-  public RequestsPerUrl: TreemapChartInput[] = [];
+  public PieChartInput: PieChartInput[] = [];
+  public TreemapChartInput: TreemapChartInput[] = [];
+  public UrlListInput: BehaviorSubject<TreemapChartInput[]> = new BehaviorSubject<TreemapChartInput[]>([]);
+
   public readonly ReqPerUrlChartOpts: ChartOptions = {
     responsive: true,
   }
@@ -40,28 +43,28 @@ export class DashboardComponent implements OnInit {
         }
       });
 
-      this.RequestsPerCountry = reqPerCountryData;
+      this.PieChartInput = reqPerCountryData;
     })
 
     // Fetch data for most popular URLs
     const maxUrls = 20;
     this.statisticsService.statisticsRequestsPerUrlGet().subscribe((res) => {
-      const reqPerUrl: TreemapChartInput[] = [];
+      const treemapInput: TreemapChartInput[] = [];
+      const urlListInput: TreemapChartInput[] = [];
       res.forEach((reqUrl: {url: string, count: number }, i: number): any => {
-        if(i >= maxUrls) {
-          // reqPerUrl[maxUrls - 1].value = reqPerUrl[maxUrls - 1].value + reqUrl.count;
-          // reqPerUrl[maxUrls - 1].label = "Other"
-          // reqPerUrl[maxUrls - 1].shortLabel = "Other"
-        } else {
-          reqPerUrl.push({
-            label: reqUrl.url,
-            value: reqUrl.count,
-            shortLabel: reqUrl.url.split('/').pop() || '',
-          });
+        const treeMapObj: TreemapChartInput = {
+          label: reqUrl.url,
+          value: reqUrl.count,
+          shortLabel: reqUrl.url.split('/').pop() || '',
         }
+        if(i < maxUrls) {
+          treemapInput.push(treeMapObj);
+        }
+        urlListInput.push(treeMapObj);
       });
 
-      this.RequestsPerUrl = reqPerUrl;
+      this.TreemapChartInput = treemapInput;
+      this.UrlListInput.next(urlListInput);
     })
   }
 }
