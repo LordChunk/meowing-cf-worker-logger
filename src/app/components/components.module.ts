@@ -6,6 +6,7 @@ import { TreemapChartComponent } from './treemap-chart/treemap-chart.component';
 import { UrlListComponent } from './url-list/url-list.component';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { MatTableModule } from '@angular/material/table';
     CommonModule,
     MatSortModule,
     MatTableModule,
+    MatPaginatorModule,
   ],
   exports: [
     PieChartComponent,

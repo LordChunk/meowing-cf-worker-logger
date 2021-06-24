@@ -1,6 +1,8 @@
 import { Component, Input, ViewChild } from '@angular/core';
-import { MatSort, Sort } from '@angular/material/sort';
-import { BehaviorSubject } from 'rxjs';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { Observable, of } from 'rxjs';
 import { TreemapChartInput } from '../treemap-chart/treemap-chart.component';
 
 @Component({
@@ -11,33 +13,21 @@ import { TreemapChartInput } from '../treemap-chart/treemap-chart.component';
 export class UrlListComponent {
 
   @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  @Input() ListData: BehaviorSubject<TreemapChartInput[]> = new BehaviorSubject<TreemapChartInput[]>([]);
+  @Input() inputData: Observable<TreemapChartInput[]> = of([])
 
-
+  tableData: MatTableDataSource<TreemapChartInput> = new MatTableDataSource();
   displayedColumns: string[] = ['shortLabel', 'value', 'label'];
 
-  sortData(sort: Sort) {
-    const data = this.ListData.getValue().slice();
-    if (!sort.active || sort.direction === '') {
-      this.ListData.next(data);
-      return;
-    }
 
-    const sortedData = data.sort((a, b) => {
-      const isAsc = sort.direction === 'asc';
-      switch (sort.active) {
-        case 'label': return compare(a.label, b.label, isAsc);
-        case 'shortLabel': return compare(a.shortLabel, b.shortLabel, isAsc);
-        case 'value': return compare(a.value, b.value, isAsc);
-        default: return 0;
-      }
+  ngAfterViewInit() {
+    this.inputData.subscribe((newListData) => {
+      this.tableData.data = newListData;
     });
 
-    this.ListData.next(sortedData);
+    this.tableData.sort = this.sort;
+    this.tableData.paginator = this.paginator;
   }
 }
 
-function compare(a: number | string, b: number | string, isAsc: boolean) {
-  return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
-}
