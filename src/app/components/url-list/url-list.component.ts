@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -10,7 +10,7 @@ import { TreemapChartInput } from '../treemap-chart/treemap-chart.component';
   templateUrl: './url-list.component.html',
   styleUrls: ['./url-list.component.scss']
 })
-export class UrlListComponent {
+export class UrlListComponent implements AfterViewInit, OnInit {
 
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -21,11 +21,13 @@ export class UrlListComponent {
   displayedColumns: string[] = ['shortLabel', 'value', 'label'];
 
 
-  ngAfterViewInit() {
+  ngOnInit() {
     this.inputData.subscribe((newListData) => {
       this.tableData.data = newListData;
     });
+  }
 
+  ngAfterViewInit() {
     this.tableData.sort = this.sort;
     this.tableData.paginator = this.paginator;
   }
